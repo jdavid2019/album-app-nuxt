@@ -25,19 +25,23 @@ export default {
       photos: []
     }
   },
-  mounted() {
-    axios.get(`${env.endpoint}/albums/${this.$route.params.id}`)
-    .then(albumResponse=>{
-      this.album = albumResponse.data
-    });
-    axios.get(`${env.endpoint}/albums/${this.$route.params.id}/photos`)
-        .then(photosResponse=>{
-          this.photos = photosResponse.data
-    });
+  mounted: async function() {
+    //  axios.get(`${env.endpoint}/albums/${this.$route.params.id}`)
+    //   .then(albumResponse=>{
+    //  this.album = albumResponse.data
+    // });
+    // axios.get(`${env.endpoint}/albums/${this.$route.params.id}/photos`)
+    //    .then(photosResponse=>{
+    //      this.photos = photosResponse.data
+    // Replace to
+     let albumResponse = await axios.get(`${env.endpoint}/albums/${this.$route.params.id}`);
+     this.album = albumResponse.data;
+     let photoResponse = await axios.get(`${env.endpoint}/albums/${this.$route.params.id}/photos`);
+     this.photos = photoResponse.data;
+    }
     //console.log(this.$route)
     //let albumId = this.$route.params.id;
     //console.log(albumId)
-  }
 }
 </script>
 

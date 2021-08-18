@@ -21,10 +21,12 @@ name: "index",
      albums: []
    }
   },
-  mounted() {
-    axios.get(`${env.endpoint}/albums`).then(response => {
-      this.albums = response.data;
-    })
+  mounted: async function() {
+    // axios.get(`${env.endpoint}/albums`).then(response => {
+    //  this.albums = response.data;
+    //})
+    let response = await axios.get(`${env.endpoint}/albums`);
+    this.albums = response.data
   }
 }
 </script>
